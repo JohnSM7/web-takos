@@ -1,0 +1,137 @@
+---
+import Stickers from './Stickers.astro';
+
+// Sección "Para beber" — Jarritos + Michelada + Cervezas
+const jarritos = [
+  { sabor: 'Tamarindo', color: '#7A1F12', accent: '#E87A2C' },
+  { sabor: 'Mandarina', color: '#E87A2C', accent: '#F2D785' },
+  { sabor: 'Lima-limón', color: '#9CC23B', accent: '#2D9B6B' },
+  { sabor: 'Fresa', color: '#DC2626', accent: '#F2D785' },
+  { sabor: 'Jamaica', color: '#A11414', accent: '#FAF6EC' },
+];
+
+const cervezas = [
+  { nombre: 'Corona', label: 'Extra', color: '#F2D785' },
+  { nombre: 'Modelo', label: 'Especial', color: '#E8A53A' },
+  { nombre: 'Pacífico', label: 'Clara', color: '#4FC3F7' },
+  { nombre: 'Victoria', label: 'México', color: '#B65512' },
+];
+---
+
+<Stickers />
+
+<section
+  data-bg="#4FC3F7"
+  data-fg="#0B0908"
+  class="relative w-full py-24 sm:py-32 px-5 sm:px-10 lg:px-12 overflow-hidden"
+>
+  <!-- Patrón talavera de fondo (azulejo) -->
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 opacity-[0.18] pointer-events-none"
+    style="background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22 viewBox=%220 0 80 80%22%3E%3Cg fill=%22none%22 stroke=%22%230B0908%22 stroke-width=%221.6%22%3E%3Crect x=%2210%22 y=%2210%22 width=%2260%22 height=%2260%22 transform=%22rotate(45 40 40)%22/%3E%3Ccircle cx=%2240%22 cy=%2240%22 r=%2210%22/%3E%3Cpath d=%22M40 16 L40 64 M16 40 L64 40%22/%3E%3C/g%3E%3C/svg%3E'); background-size: 64px 64px;"
+  ></div>
+
+  <div class="relative z-10 max-w-6xl mx-auto">
+
+    <!-- Encabezado -->
+    <header class="mb-14 sm:mb-16 text-center">
+      <span class="sello text-noche mb-6 inline-block">★ Para beber ★</span>
+      <h2 class="leading-[0.92] tracking-tight">
+        <span class="block font-display text-noche text-5xl sm:text-7xl uppercase">
+          Frescura
+        </span>
+        <span class="block serif-italic text-chile text-5xl sm:text-7xl">
+          mexicana de verdad
+        </span>
+      </h2>
+      <p class="mt-6 max-w-xl mx-auto serif-body text-noche text-base sm:text-lg">
+        Jarritos de cristal, micheladas con tajín y cerveza fría como manda la cantina.
+        Todo importado de México, todo a precio honesto.
+      </p>
+    </header>
+
+    <!-- Jarritos (sabores) -->
+    <div class="mb-14">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="font-display text-2xl sm:text-3xl text-noche uppercase tracking-tight">★ Jarritos</h3>
+        <span class="font-display text-xl sm:text-2xl text-chile bg-amarillo px-3 py-1 rounded-full">2 €</span>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
+        {jarritos.map((j, i) => (
+          <article
+            class="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-lg p-4 flex flex-col items-center justify-end text-center"
+            style={`background: linear-gradient(180deg, ${j.color} 0%, ${j.accent} 100%); transform: rotate(${i % 2 === 0 ? '-1' : '1'}deg);`}
+          >
+            <svg class="absolute top-3 left-1/2 -translate-x-1/2 w-14 h-14 sm:w-20 sm:h-20 drop-shadow-lg">
+              <use href="#sticker-jarrito"/>
+            </svg>
+            <h4 class="relative font-display text-base sm:text-lg text-crema uppercase leading-tight">{j.sabor}</h4>
+            <div class="relative mt-1 inline-block px-2 py-0.5 bg-crema text-noche font-mono text-[9px] uppercase tracking-widest rounded-full">
+              Jarrito
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <!-- Michelada destacada + Cervezas -->
+    <div class="grid md:grid-cols-3 gap-5">
+
+      <!-- Michelada hero card -->
+      <article class="md:col-span-2 relative rounded-3xl overflow-hidden bg-noche text-crema p-6 sm:p-8 min-h-[280px] shadow-2xl">
+        <!-- Stickers decorativos -->
+        <svg class="absolute top-4 right-4 w-16 h-16 sm:w-24 sm:h-24 rotate-12">
+          <use href="#sticker-chile"/>
+        </svg>
+        <svg class="absolute bottom-4 right-20 w-10 h-10 sm:w-14 sm:h-14 -rotate-6">
+          <use href="#sticker-lima"/>
+        </svg>
+
+        <span class="sello text-amarillo">★ La estrella de la barra ★</span>
+        <h3 class="mt-5 font-display text-4xl sm:text-6xl uppercase leading-[0.92]">Michelada</h3>
+        <p class="serif-italic text-amarillo text-2xl sm:text-3xl mt-1">de la casa</p>
+        <p class="mt-4 serif-body text-crema/85 text-base max-w-md leading-snug">
+          Cerveza muy fría, lima exprimida, chamoy, salsas y escarcha de tajín. Servida en jarra grande.
+          La hacemos como en México, sin atajos.
+        </p>
+        <div class="mt-6 flex items-end gap-4">
+          <span class="font-display text-5xl text-chile">5 €</span>
+          <span class="font-mono text-[10px] uppercase tracking-widest text-crema/60 pb-2">jarra grande</span>
+        </div>
+      </article>
+
+      <!-- Cervezas grid -->
+      <div class="flex flex-col gap-3">
+        <h3 class="font-display text-xl text-crema bg-chile px-4 py-3 rounded-2xl uppercase tracking-tight inline-flex items-center justify-between shadow-lg">
+          <span>★ Cerveza fría</span>
+          <span class="text-amarillo">3 €</span>
+        </h3>
+        {cervezas.map((c, i) => (
+          <article
+            class="rounded-xl px-4 py-3 shadow-md flex items-center justify-between gap-3"
+            style={`background: ${c.color};`}
+          >
+            <div>
+              <p class="font-display text-base sm:text-lg uppercase leading-tight" style={c.color === '#F2D785' || c.color === '#E8A53A' ? 'color:#0B0908' : 'color:#FAF6EC'}>
+                {c.nombre}
+              </p>
+              <p class="font-mono text-[9px] uppercase tracking-widest opacity-70" style={c.color === '#F2D785' || c.color === '#E8A53A' ? 'color:#0B0908' : 'color:#FAF6EC'}>
+                {c.label}
+              </p>
+            </div>
+            <span class="font-display text-2xl" style={c.color === '#F2D785' || c.color === '#E8A53A' ? 'color:#0B0908' : 'color:#FAF6EC'}>355ml</span>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <!-- Aguas frescas mención -->
+    <p class="mt-12 text-center font-hand text-2xl sm:text-3xl text-noche">
+      + aguas frescas de horchata, jamaica y tamarindo
+      <span class="block text-base sm:text-lg text-noche/70 font-body mt-1 italic">
+        recién hechas cada mañana
+      </span>
+    </p>
+  </div>
+</section>
