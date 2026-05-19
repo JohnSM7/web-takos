@@ -84,13 +84,18 @@ export const biblioteca = {
     colaEsquina: `${LOCAL}/fachada-cola-esquina.jpg`,
     colaFamilias: `${LOCAL}/fachada-cola-familias.jpg`,
   },
+  // Local NUEVO (el grande, con balcón, papel picado masivo, Catrinas)
   interior: {
     catrinaPapelPicado: `${LOCAL}/interior-catrina.jpg`,
+    catrinaCempasuchil: `${LOCAL}/interior-catrina-cempasuchil.jpg`,
+    catrinaPuertasAzul: `${LOCAL}/catrina-puertas-azul.jpg`,
     papelPicado: `${LOCAL}/interior-papel-picado.jpg`,
+  },
+  // Local antiguo (sólo referencia histórica — NO usar en la web)
+  _antiguo: {
     banderaMex: `${LOCAL}/interior-bandera-mex.jpg`,
     puertasTalavera: `${LOCAL}/interior-puertas-talavera.jpg`,
     barra: `${LOCAL}/interior-barra.jpg`,
-    catrinaCempasuchil: `${LOCAL}/interior-catrina-cempasuchil.jpg`,
   },
   platos: {
     pastorPina: `${LOCAL}/tacos-pastor-pina.jpg`,
@@ -158,7 +163,7 @@ export const carta: PlatoCarta[] = [
       'Cerveza fría, lima, salsas, chamoy y escarcha de tajín. Servida en jarra grande. Frescor mexicano puro.',
     precio: '5 €',
     tag: 'Imprescindible',
-    imagen: `${LOCAL}/interior-barra.jpg`,
+    imagen: `${LOCAL}/catrina-puertas-azul.jpg`,
   },
 ];
 
@@ -213,13 +218,14 @@ export const resenas: Resena[] = [
   },
 ];
 
+// Galería de "La fila" — sólo fachadas + interior del local NUEVO
 export const galeriaCola: { src: string; alt: string }[] = [
   { src: `${LOCAL}/fachada-noche-cola.jpg`, alt: 'Cola en la puerta del local por la noche' },
-  { src: `${LOCAL}/interior-catrina.jpg`, alt: 'Interior con papel picado y Catrina mexicana' },
+  { src: `${LOCAL}/interior-catrina.jpg`, alt: 'Comedor del local con papel picado y Catrina' },
   { src: `${LOCAL}/fachada-cola-familias.jpg`, alt: 'Familias esperando en la fila de la puerta' },
   { src: `${LOCAL}/interior-papel-picado.jpg`, alt: 'Comedor con papel picado de colores' },
-  { src: `${LOCAL}/fachada-cola-esquina.jpg`, alt: 'Cola en la esquina del local en Plaza Mayor' },
-  { src: `${LOCAL}/interior-bandera-mex.jpg`, alt: 'Interior con la bandera de México' },
+  { src: `${LOCAL}/fachada-cola-esquina.jpg`, alt: 'Cola en la esquina del local' },
+  { src: `${LOCAL}/catrina-puertas-azul.jpg`, alt: 'Catrina y puertas talavera del comedor nuevo' },
   { src: `${LOCAL}/cliente-noche.jpg`, alt: 'Cliente sonriente saliendo del local por la noche' },
   { src: `${LOCAL}/interior-catrina-cempasuchil.jpg`, alt: 'Catrina con cempasúchil en el balcón' },
 ];
