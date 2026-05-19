@@ -1,0 +1,141 @@
+---
+import { locales, negocio } from '@data/business';
+---
+
+<section
+  id="donde"
+  data-bg="#FAF6EC"
+  data-fg="#0B0908"
+  class="relative w-full py-28 sm:py-40 px-6 sm:px-12 overflow-hidden"
+>
+  <header class="max-w-6xl mx-auto mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+    <div>
+      <span class="sello text-chile">★ Dónde estamos ★</span>
+      <h2 class="mt-6 leading-[0.92] tracking-tight">
+        <span class="block font-display text-noche text-5xl sm:text-7xl uppercase">Calle de la</span>
+        <span class="block serif-italic text-chile text-5xl sm:text-7xl">Salud, 13.</span>
+      </h2>
+    </div>
+    <p class="max-w-sm text-noche/75 serif-body leading-relaxed">
+      A un paso de Gran Vía, Callao y Puerta del Sol. Frente al hostal Triana. No tenemos sucursales
+      — si comes tacos al pastor de verdad, los comes aquí.
+    </p>
+  </header>
+
+  <div class="max-w-6xl mx-auto grid lg:grid-cols-5 gap-7">
+
+    <!-- Mapa -->
+    <div class="lg:col-span-3 relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/3] lg:aspect-auto lg:min-h-[520px] map-talavera bg-amarillo/30">
+      <div id="leaflet-map" class="absolute inset-0"></div>
+    </div>
+
+    <!-- Lista locales -->
+    <ul class="lg:col-span-2 flex flex-col gap-4">
+      {locales.map((l) => (
+        <li
+          class={`relative rounded-2xl p-6 shadow-lg ${
+            l.destacado ? 'bg-chile text-crema' : 'bg-crema text-noche'
+          }`}
+        >
+          {l.destacado && (
+            <span class="absolute -top-3 left-5 px-3 py-1 bg-amarillo text-noche rounded-full text-[10px] font-mono uppercase tracking-widest font-bold">
+              ★ Principal
+            </span>
+          )}
+          <h3 class="font-display text-xl leading-tight uppercase tracking-tight">
+            {l.nombre.split('·')[1]?.trim() ?? l.nombre}
+          </h3>
+          <p class={`mt-2 text-sm serif-body ${l.destacado ? 'text-crema/85' : 'text-noche/75'}`}>
+            {l.direccion}<br/>
+            {l.cp} {l.ciudad}, {l.pais}
+          </p>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            {l.metro.map((m) => (
+              <span class={`px-2 py-0.5 rounded-full text-[10px] font-mono uppercase tracking-widest ${
+                l.destacado ? 'bg-amarillo text-noche' : 'bg-jade text-crema'
+              }`}>
+                M · {m}
+              </span>
+            ))}
+          </div>
+          <a
+            href={`https://www.openstreetmap.org/?mlat=${l.lat}&mlon=${l.lng}#map=18/${l.lat}/${l.lng}`}
+            target="_blank"
+            rel="noopener"
+            class={`mt-4 inline-block font-mono text-xs uppercase tracking-widest underline underline-offset-4 ${l.destacado ? 'text-amarillo' : 'text-chile'}`}
+          >
+            Cómo llegar →
+          </a>
+        </li>
+      ))}
+
+      <li class="rounded-2xl p-6 bg-amarillo shadow-lg">
+        <p class="font-display text-lg leading-tight text-noche uppercase tracking-tight">{negocio.horario.legible}</p>
+        <p class="mt-2 text-sm text-noche/70 serif-body">{negocio.horario.cerrado}</p>
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    import L from 'leaflet';
+    import { locales } from '../data/business';
+
+    const target = document.getElementById('leaflet-map');
+    if (target && !target.hasAttribute('data-init')) {
+      const io = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              initMap();
+              obs.disconnect();
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      io.observe(target);
+
+      function initMap() {
+        target!.setAttribute('data-init', 'true');
+        const principal = locales.find((l) => l.destacado) ?? locales[0];
+        const map = L.map(target!, {
+          zoomControl: false,
+          scrollWheelZoom: false,
+          attributionControl: true,
+        }).setView([principal.lat, principal.lng], 16);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '© OpenStreetMap',
+          maxZoom: 19,
+        }).addTo(map);
+
+        L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+        const customIcon = L.divIcon({
+          className: 'takos-pin',
+          html: `
+            <div style="position: relative; width: 40px; height: 40px; transform: translate(-50%, -100%);">
+              <div style="position: absolute; inset: 0; background: #DC2626; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); box-shadow: 0 4px 12px rgba(220,38,38,0.4); animation: pulse 2.4s ease-in-out infinite;"></div>
+              <div style="position: absolute; top: 7px; left: 50%; transform: translateX(-50%); width: 22px; height: 22px; border-radius: 50%; background: #F2D785; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #0B0908;">★</div>
+            </div>
+            <style>
+              @keyframes pulse {
+                0%, 100% { transform: rotate(-45deg) scale(1); }
+                50% { transform: rotate(-45deg) scale(1.1); }
+              }
+            </style>
+          `,
+          iconAnchor: [20, 40],
+        });
+
+        locales.forEach((l) => {
+          L.marker([l.lat, l.lng], { icon: customIcon })
+            .addTo(map)
+            .bindPopup(
+              `<strong style="font-family:'Archivo Black',sans-serif;font-size:13px;color:#DC2626;text-transform:uppercase;letter-spacing:-0.01em">${l.nombre}</strong><br><span style="color:#0B0908;font-family:'Fraunces',serif;font-style:italic">${l.direccion}</span>`
+            );
+        });
+      }
+    }
+  </script>
+</section>

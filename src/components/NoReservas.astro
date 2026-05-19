@@ -1,0 +1,50 @@
+---
+import { negocio, biblioteca } from '@data/business';
+---
+
+<section
+  data-bg="#0B0908"
+  data-fg="#FAF6EC"
+  class="relative w-full py-28 sm:py-40 px-5 sm:px-10 lg:px-12 overflow-hidden grain"
+>
+  <!-- Foto de fondo: cola nocturna del local -->
+  <div class="absolute inset-0 z-0">
+    <img
+      src={biblioteca.fachada.nocheCola}
+      alt=""
+      class="w-full h-full object-cover opacity-30"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-noche via-noche/85 to-noche"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-noche/95 via-transparent to-noche/95"></div>
+  </div>
+
+  <div class="relative z-10 max-w-4xl mx-auto text-center">
+    <span class="sello text-amarillo">★ Aviso de la casa ★</span>
+
+    <h2 class="mt-8 leading-[0.92] tracking-tight">
+      <span class="block font-display text-crema text-5xl sm:text-7xl md:text-8xl uppercase">No aceptamos</span>
+      <span class="block serif-italic text-amarillo text-6xl sm:text-8xl md:text-[9rem] mt-2">
+        reservas.
+      </span>
+    </h2>
+
+    <p class="mt-10 max-w-2xl mx-auto text-crema text-lg sm:text-xl md:text-2xl leading-snug serif-body">
+      Ven cuando puedas. Haz cola si toca. Pide en barra.
+      Paga antes de sentarte. Come hasta sonreír.
+      <span class="block mt-3 font-display text-amarillo text-xl sm:text-2xl uppercase tracking-tight">Así es como funciona. Así seguirá siendo.</span>
+    </p>
+
+    <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5">
+      <a href="#donde" data-magnetic class="btn-pop">
+        Ver mapa →
+      </a>
+      <a
+        href={`tel:${negocio.telefono.replace(/\s/g, '')}`}
+        class="font-mono text-xs uppercase tracking-[0.2em] text-crema border-b border-crema/40 hover:border-crema transition pb-1"
+      >
+        ¿Llamar? {negocio.telefono}
+      </a>
+    </div>
+  </div>
+</section>

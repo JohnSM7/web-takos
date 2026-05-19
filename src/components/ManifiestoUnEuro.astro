@@ -1,0 +1,78 @@
+---
+import { negocio, biblioteca } from '@data/business';
+---
+
+<section
+  data-bg="#E87A2C"
+  data-fg="#0B0908"
+  class="relative w-full py-24 sm:py-32 lg:py-40 px-5 sm:px-10 lg:px-12 overflow-hidden grain"
+>
+  <div class="relative z-10 max-w-7xl mx-auto grid md:grid-cols-12 gap-10 md:gap-12 lg:gap-16 items-center">
+
+    <!-- COLUMNA TEXTO MANIFIESTO -->
+    <div class="md:col-span-7 text-center md:text-left">
+      <span class="sello text-noche/80 mb-8 inline-block">★ Manifiesto Takero ★</span>
+
+      <h2 class="mt-6 leading-[0.92] tracking-tight">
+        <span class="block font-display text-noche text-5xl sm:text-7xl md:text-8xl uppercase">
+          Un tako.
+        </span>
+        <span class="block serif-italic text-crema text-6xl sm:text-8xl md:text-9xl -mt-2">
+          un euro.
+        </span>
+        <span class="block font-hand text-noche text-4xl sm:text-6xl mt-6 rotate-[-2deg]">
+          ¡cero excusas!
+        </span>
+      </h2>
+
+      <!-- Cartel manifesto -->
+      <div class="mt-10 max-w-2xl mx-auto lg:mx-0 bg-crema rounded-3xl px-6 sm:px-8 py-7 shadow-2xl rotate-[-0.5deg]">
+        <p class="serif-body text-noche text-base sm:text-lg leading-snug">
+          Marinamos cerdo en achiote y especias durante <strong class="font-display">12 horas</strong>.
+          Lo apilamos en un trompo. Lo asamos a fuego vivo. Lo cortamos delante de ti.
+          Tortilla recién hecha. Piña. Cebolla. Cilantro.
+          <span class="block mt-3 font-display text-xl sm:text-2xl text-chile uppercase tracking-tight">Te lo damos por un euro.</span>
+        </p>
+      </div>
+
+      <!-- Estadísticas -->
+      <div class="mt-10 flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4">
+        {[
+          { n: `${negocio.rating}★`, t: 'en Google', c: 'bg-chile text-crema' },
+          { n: negocio.resenasTotales.toLocaleString('es-ES'), t: 'reseñas', c: 'bg-jade text-crema' },
+          { n: '+10', t: 'años en Madrid', c: 'bg-talavera text-noche' },
+          { n: '12 h', t: 'marinado', c: 'bg-amarillo text-noche' },
+        ].map((s, i) => (
+          <div class={`${s.c} rounded-2xl px-5 py-3 shadow-xl`} style={`transform: rotate(${i % 2 === 0 ? '-1.5' : '1.5'}deg);`}>
+            <div class="font-display text-xl sm:text-2xl leading-none">{s.n}</div>
+            <div class="font-mono text-[9px] uppercase tracking-widest mt-1.5 opacity-85">{s.t}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- COLUMNA VISUAL: stack de fotos del trompo + interior -->
+    <div class="md:col-span-5 relative">
+      <div class="relative h-[380px] sm:h-[460px] lg:h-[520px] max-w-md mx-auto md:max-w-none">
+
+        <!-- Foto principal: bandera mexicana interior -->
+        <figure class="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl rotate-[2deg]">
+          <img src={biblioteca.interior.banderaMex} alt="Interior del local con la bandera de México" class="w-full h-full object-cover" loading="lazy"/>
+        </figure>
+
+        <!-- Foto secundaria: plato variado -->
+        <figure class="absolute -bottom-4 -left-4 w-2/5 aspect-square rounded-2xl overflow-hidden shadow-2xl rotate-[-6deg] border-4 border-crema">
+          <img src={biblioteca.platos.variados} alt="Plato variado de tacos del local" class="w-full h-full object-cover" loading="lazy"/>
+        </figure>
+
+        <!-- Logo decorativo -->
+        <img
+          src={negocio.logo}
+          alt=""
+          class="absolute -top-6 -right-4 w-24 sm:w-28 aspect-square rounded-full shadow-2xl rotate-[12deg] border-4 border-crema"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+</section>

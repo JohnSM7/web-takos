@@ -1,0 +1,140 @@
+---
+import { negocio, biblioteca } from '@data/business';
+---
+
+<section
+  id="top"
+  data-bg="#FAF6EC"
+  data-fg="#0B0908"
+  class="relative min-h-[100svh] w-full overflow-hidden bg-crema"
+>
+  <!-- Textura sutil de fondo -->
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 opacity-[0.05] pointer-events-none"
+    style="background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22 viewBox=%220 0 80 80%22%3E%3Cg fill=%22%23DC2626%22%3E%3Ccircle cx=%2240%22 cy=%2240%22 r=%221.5%22/%3E%3C/g%3E%3C/svg%3E'); background-size: 32px 32px;"
+  ></div>
+
+  <div class="relative z-10 min-h-[100svh] flex flex-col px-5 sm:px-8 lg:px-12 pt-24 sm:pt-28 pb-12 max-w-7xl mx-auto">
+
+    <!-- Pill superior -->
+    <div class="flex items-center gap-3 mb-6 sm:mb-8 scroll-fade-in flex-wrap">
+      <span class="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-noche text-crema font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.22em]">
+        <span class="w-1.5 h-1.5 rounded-full bg-jade animate-pulse"></span>
+        Abierto · C/ Salud 13 · Madrid
+      </span>
+      <span class="hidden sm:inline font-hand text-noche/70 text-2xl rotate-[-3deg]">desde 2014</span>
+    </div>
+
+    <!-- Bloque principal: 2 columnas (lg+) -->
+    <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center flex-1">
+
+      <!-- COLUMNA TEXTO -->
+      <div class="lg:col-span-6 order-2 lg:order-1">
+        <h1 class="leading-[0.92] tracking-tight">
+          <span class="block font-display text-noche text-[2.5rem] sm:text-6xl lg:text-[5rem] uppercase">
+            Auténtico
+          </span>
+          <span class="block serif-italic text-chile text-[3rem] sm:text-7xl lg:text-[6rem] -mt-1">
+            como en México
+          </span>
+        </h1>
+
+        <p class="mt-5 sm:mt-7 serif-body text-noche text-base sm:text-lg lg:text-xl leading-relaxed max-w-xl">
+          Marinamos cerdo en achiote 12 horas.
+          Lo apilamos en un trompo. Lo asamos a fuego vivo.
+          <strong class="block mt-2 font-display text-chile uppercase text-sm sm:text-base lg:text-lg tracking-tight">
+            Lo cortamos delante de ti.
+          </strong>
+        </p>
+
+        <!-- CTAs -->
+        <div class="mt-6 sm:mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
+          <a href="#carta" data-magnetic class="btn-pop">
+            Ver la carta →
+          </a>
+          <a href="#donde" data-magnetic class="btn-pop btn-pop--noche">
+            Cómo llegar
+          </a>
+        </div>
+
+        <!-- Rating bar -->
+        <div class="mt-7 sm:mt-9 flex items-center gap-3 sm:gap-5 text-noche flex-wrap">
+          <div class="flex items-center gap-1.5">
+            <div class="flex text-chile text-base sm:text-lg">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <span class={i < Math.floor(negocio.rating) ? '' : 'opacity-30'}>★</span>
+              ))}
+            </div>
+            <span class="font-display text-sm sm:text-base">{negocio.rating}</span>
+          </div>
+          <span class="text-noche/40">|</span>
+          <span class="font-mono text-[10px] sm:text-xs uppercase tracking-[0.15em] text-noche/70">
+            <strong class="text-noche">{negocio.resenasTotales.toLocaleString('es-ES')}</strong> reseñas Google
+          </span>
+        </div>
+      </div>
+
+      <!-- COLUMNA VISUAL: mosaico fotos del local -->
+      <div class="lg:col-span-6 order-1 lg:order-2">
+
+        <!-- Mosaico de fotos del local (4 cuadros) — wrapper relative para flotantes -->
+        <div class="relative grid grid-cols-6 grid-rows-6 gap-2 sm:gap-2.5 lg:gap-3 h-[340px] sm:h-[460px] lg:h-[540px]">
+
+          <!-- Foto 1: interior catrina papel picado (grande, top-left) -->
+          <figure class="col-span-4 row-span-4 relative rounded-2xl overflow-hidden shadow-xl">
+            <img src={biblioteca.interior.catrinaPapelPicado} alt="Comedor del local con papel picado y Catrina" class="w-full h-full object-cover" loading="eager" fetchpriority="high"/>
+            <figcaption class="absolute bottom-1.5 left-1.5 font-hand text-sm sm:text-lg text-crema bg-noche/55 backdrop-blur-sm px-2 py-0 sm:px-2.5 sm:py-0.5 rounded">
+              comedor
+            </figcaption>
+          </figure>
+
+          <!-- Foto 2: pastor con piña (top-right) -->
+          <figure class="col-span-2 row-span-3 relative rounded-2xl overflow-hidden shadow-xl">
+            <img src={biblioteca.platos.pastorPina} alt="Tacos al pastor con piña" class="w-full h-full object-cover" loading="eager"/>
+          </figure>
+
+          <!-- Foto 3: fachada (mid-right) -->
+          <figure class="col-span-2 row-span-3 relative rounded-2xl overflow-hidden shadow-xl">
+            <img src={biblioteca.fachada.dia} alt="Fachada del local en Calle de la Salud 13" class="w-full h-full object-cover" loading="lazy"/>
+            <figcaption class="absolute bottom-1.5 left-1.5 font-hand text-xs sm:text-base text-crema bg-noche/55 backdrop-blur-sm px-2 py-0 sm:py-0.5 rounded">
+              C/ Salud 13
+            </figcaption>
+          </figure>
+
+          <!-- Foto 4: cola nocturna (bottom-left) -->
+          <figure class="col-span-4 row-span-2 relative rounded-2xl overflow-hidden shadow-xl">
+            <img src={biblioteca.fachada.nocheCola} alt="Cola en la puerta del local por la noche" class="w-full h-full object-cover" loading="lazy"/>
+            <figcaption class="absolute bottom-1.5 left-1.5 font-hand text-sm sm:text-base text-crema bg-noche/55 backdrop-blur-sm px-2 py-0 sm:px-2.5 sm:py-0.5 rounded">
+              la cola que vale la pena
+            </figcaption>
+          </figure>
+
+          <!-- Logo flotante esquina superior derecha del MOSAICO -->
+          <div class="logo-halo !absolute -top-5 -right-3 sm:-top-7 sm:-right-5 w-20 sm:w-24 lg:w-28 z-30 pointer-events-none">
+            <img
+              src={negocio.logo}
+              alt={`Logo ${negocio.nombre}`}
+              class="relative aspect-square object-contain rounded-full shadow-2xl"
+              width="112"
+              height="112"
+              loading="eager"
+              fetchpriority="high"
+            />
+          </div>
+
+          <!-- Sello 1€ flotante esquina inferior izquierda del MOSAICO -->
+          <div class="absolute -bottom-4 -left-3 sm:-bottom-5 sm:-left-4 z-30">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-chile rounded-full flex items-center justify-center rotate-[-8deg] shadow-xl">
+              <div class="text-center text-crema font-display leading-none">
+                <span class="block text-[7px] sm:text-[8px] tracking-[0.1em] opacity-80">DESDE</span>
+                <span class="block text-xl sm:text-2xl lg:text-3xl mt-0.5 sm:mt-1">1€</span>
+                <span class="block text-[6px] sm:text-[7px] tracking-[0.1em] opacity-80 mt-0.5 sm:mt-1">EL TAKO</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

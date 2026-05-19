@@ -1,0 +1,55 @@
+---
+import { galeriaCola } from '@data/business';
+---
+
+<section
+  id="experiencia"
+  data-bg="#0B0908"
+  data-fg="#FAF6EC"
+  class="relative w-full py-28 sm:py-40 overflow-hidden grain"
+>
+  <header class="max-w-6xl mx-auto px-6 sm:px-12 mb-16">
+    <span class="sello text-amarillo">★ La experiencia ★</span>
+    <h2 class="mt-5 leading-[0.92] tracking-tight max-w-4xl">
+      <span class="block font-display text-crema text-5xl sm:text-7xl md:text-8xl uppercase">La fila</span>
+      <span class="block serif-italic text-chile text-5xl sm:text-7xl md:text-8xl">que merece la pena</span>
+    </h2>
+    <p class="mt-6 max-w-xl text-crema/75 text-lg serif-body leading-relaxed">
+      Es martes a las 21:30 y hay cola en la puerta. Es viernes a la 1 de la madrugada
+      y todavía hay cola. Es el mejor signo de que estamos haciendo algo bien.
+    </p>
+  </header>
+
+  <!-- Galería scroll horizontal -->
+  <div class="relative">
+    <div class="flex gap-5 sm:gap-7 px-6 sm:px-12 overflow-x-auto snap-x snap-mandatory pb-8 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+      {galeriaCola.map((img, i) => (
+        <figure
+          class={`relative shrink-0 snap-center rounded-3xl overflow-hidden shadow-2xl ${
+            i % 2 === 0 ? 'w-[78vw] sm:w-[42vw] aspect-[4/5]' : 'w-[60vw] sm:w-[32vw] aspect-[3/4] mt-12'
+          }`}
+        >
+          <img src={img.src} alt={img.alt} class="w-full h-full object-cover scroll-parallax" loading="lazy"/>
+          <figcaption class="absolute bottom-3 left-3 font-mono text-[10px] uppercase tracking-widest text-noche bg-amarillo px-3 py-1.5 rounded-full">
+            #{String(i + 1).padStart(2, '0')}
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+
+  <!-- Pilares -->
+  <div class="max-w-6xl mx-auto px-6 sm:px-12 mt-20 grid sm:grid-cols-3 gap-10">
+    {[
+      { n: '01', t: 'Sin reservas', d: 'No queremos mesas vacías esperando a alguien. Llegas, esperas, comes, repites.' },
+      { n: '02', t: '30 min de espera', d: 'Es lo normal en horario punta. Las mesas se mueven rápido. La cola no es un atasco, es un termómetro.' },
+      { n: '03', t: 'Menos de 10 €', d: 'Sales lleno, contento y todavía te sobra para una michelada en la terraza de al lado.' },
+    ].map((b) => (
+      <div>
+        <span class="block font-display text-amarillo text-4xl mb-3">{b.n}</span>
+        <h3 class="font-display text-2xl text-crema uppercase tracking-tight">{b.t}</h3>
+        <p class="mt-3 text-crema/75 serif-body leading-relaxed">{b.d}</p>
+      </div>
+    ))}
+  </div>
+</section>

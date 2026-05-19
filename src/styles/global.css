@@ -1,0 +1,305 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============== TOKENS — Colores reales del logo ============== */
+:root {
+  --chile: #DC2626;
+  --chile-deep: #A11414;
+  --jade: #2D9B6B;
+  --jade-deep: #1F6E4A;
+  --achiote: #E87A2C;
+  --achiote-deep: #B65512;
+  --crema: #FAF6EC;
+  --amarillo: #F2D785;
+  --talavera: #4FC3F7;
+  --mole: #3D1F11;
+  --noche: #0B0908;
+
+  --bg-now: var(--crema);
+  --fg-now: var(--noche);
+
+  color-scheme: light dark;
+}
+
+/* ============== BASE ============== */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: 'Fraunces', Georgia, serif;
+  font-feature-settings: 'ss01' on, 'ss02' on;
+  background: var(--bg-now);
+  color: var(--fg-now);
+  transition: background-color 1s ease, color 0.7s ease;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--chile);
+  color: var(--crema);
+}
+
+/* ============== UTILIDADES MERCADO POP ============== */
+
+/* Italic display para titulares editoriales */
+.serif-italic {
+  font-family: 'Fraunces', Georgia, serif;
+  font-style: italic;
+  font-weight: 600;
+  font-variation-settings: 'opsz' 144, 'SOFT' 100;
+  letter-spacing: -0.02em;
+}
+
+/* Texto editorial body */
+.serif-body {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 400;
+  font-variation-settings: 'opsz' 14;
+}
+
+/* Recorte con imagen sobre tipografía */
+.text-fill-img {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Sello rotativo tipo "OFICIAL" */
+.sello {
+  display: inline-block;
+  border: 2px solid currentColor;
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* Grano vintage muy sutil */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.08;
+  mix-blend-mode: overlay;
+}
+
+/* Cursor magnético */
+[data-magnetic] {
+  will-change: transform;
+  transition: transform 0.2s ease-out;
+}
+
+/* Scroll-driven animations nativas */
+@supports (animation-timeline: scroll()) {
+  .scroll-shrink {
+    animation: scroll-shrink linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 80%;
+  }
+  @keyframes scroll-shrink {
+    from { transform: scale(1) translateY(0); }
+    to { transform: scale(0.7) translateY(-6vh); }
+  }
+  .scroll-fade-in {
+    animation: scroll-fade linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 30%;
+  }
+  @keyframes scroll-fade {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .scroll-parallax {
+    animation: scroll-parallax linear both;
+    animation-timeline: view();
+    animation-range: cover;
+  }
+  @keyframes scroll-parallax {
+    from { transform: translateY(6%); }
+    to { transform: translateY(-6%); }
+  }
+}
+
+/* Marquee */
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+.marquee-rev { animation: marquee 36s linear infinite reverse; }
+
+/* Bento card — limpio, sin border-3 triple ni shadow exagerada */
+.bento-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 24px;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s;
+}
+.bento-card:hover {
+  transform: translate3d(0, -4px, 0);
+  box-shadow: 0 18px 40px -10px rgba(11, 9, 8, 0.25);
+}
+.bento-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    500px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.12),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.4s;
+  z-index: 1;
+  pointer-events: none;
+}
+.bento-card:hover::before { opacity: 1; }
+
+/* Reseña card — limpia, sin border triple */
+.review-card {
+  border-radius: 20px;
+  transition: transform 0.4s, box-shadow 0.4s;
+}
+.review-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 0 18px 30px -10px rgba(11, 9, 8, 0.2);
+}
+
+/* Leaflet override — modo "azulejo talavera" */
+.map-talavera .leaflet-tile {
+  filter: sepia(0.3) saturate(1.2) hue-rotate(-12deg) contrast(1.05) brightness(0.98);
+}
+.map-talavera .leaflet-container {
+  background: var(--crema);
+}
+.map-talavera .leaflet-control-attribution {
+  background: rgba(11, 9, 8, 0.75);
+  color: var(--crema);
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+}
+.map-talavera .leaflet-control-attribution a { color: var(--amarillo); }
+
+/* CTA pop — botón redondo con peso visual, sin sombra cómic gigante */
+.btn-pop {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 1rem 1.7rem;
+  border-radius: 999px;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--chile);
+  color: var(--crema);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  box-shadow: 0 6px 0 var(--chile-deep), 0 8px 20px -5px rgba(220, 38, 38, 0.5);
+}
+.btn-pop:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 var(--chile-deep), 0 14px 24px -5px rgba(220, 38, 38, 0.6);
+}
+.btn-pop:active {
+  transform: translateY(4px);
+  box-shadow: 0 0px 0 var(--chile-deep), 0 2px 8px -2px rgba(220, 38, 38, 0.5);
+}
+
+.btn-pop--jade {
+  background: var(--jade);
+  box-shadow: 0 6px 0 var(--jade-deep), 0 8px 20px -5px rgba(45, 155, 107, 0.5);
+}
+.btn-pop--jade:hover { box-shadow: 0 8px 0 var(--jade-deep), 0 14px 24px -5px rgba(45, 155, 107, 0.6); }
+.btn-pop--jade:active { box-shadow: 0 0px 0 var(--jade-deep), 0 2px 8px -2px rgba(45, 155, 107, 0.5); }
+
+.btn-pop--noche {
+  background: var(--noche);
+  color: var(--crema);
+  box-shadow: 0 6px 0 #000, 0 8px 20px -5px rgba(0, 0, 0, 0.4);
+}
+.btn-pop--noche:hover { box-shadow: 0 8px 0 #000, 0 14px 24px -5px rgba(0, 0, 0, 0.5); }
+.btn-pop--noche:active { box-shadow: 0 0px 0 #000, 0 2px 8px -2px rgba(0, 0, 0, 0.4); }
+
+.btn-pop--amarillo {
+  background: var(--amarillo);
+  color: var(--noche);
+  box-shadow: 0 6px 0 #C9A938, 0 8px 20px -5px rgba(201, 169, 56, 0.5);
+}
+.btn-pop--amarillo:hover { box-shadow: 0 8px 0 #C9A938, 0 14px 24px -5px rgba(201, 169, 56, 0.6); }
+
+/* Logo halo — anillo conic-gradient rotando */
+.logo-halo {
+  position: relative;
+  isolation: isolate;
+}
+.logo-halo::before {
+  content: '';
+  position: absolute;
+  inset: -28px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    var(--amarillo) 0deg,
+    var(--achiote) 40deg,
+    var(--chile) 90deg,
+    var(--achiote) 140deg,
+    var(--amarillo) 180deg,
+    var(--jade) 220deg,
+    var(--amarillo) 270deg,
+    var(--achiote) 320deg,
+    var(--amarillo) 360deg
+  );
+  filter: blur(6px);
+  z-index: -1;
+  animation: spin 24s linear infinite;
+}
+.logo-halo > img {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.logo-halo:hover > img { transform: rotate(8deg); }
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Float vertical sutil */
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.animate-float-y { animation: float-y 6s ease-in-out infinite; }
+
+/* Wobble pequeño */
+@keyframes wobble {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+.animate-wobble { animation: wobble 5s ease-in-out infinite; }
+
+/* Marquee animation */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Respeto a reducción de motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

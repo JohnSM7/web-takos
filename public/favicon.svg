@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <pattern id="spiral" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+      <circle cx="8" cy="8" r="6" fill="none" stroke="#C9531B" stroke-width="1.2"/>
+      <circle cx="8" cy="8" r="2.4" fill="none" stroke="#C9531B" stroke-width="1.2"/>
+    </pattern>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#E87A2C"/>
+  <rect width="64" height="64" rx="14" fill="url(#spiral)" opacity="0.6"/>
+  <circle cx="32" cy="32" r="22" fill="#F2D785"/>
+  <circle cx="32" cy="32" r="16" fill="#2D9B6B"/>
+  <text x="32" y="40" text-anchor="middle" font-family="Bungee, system-ui, sans-serif" font-weight="900" font-size="20" fill="#DC2626" stroke="#0B0908" stroke-width="2.5" paint-order="stroke" letter-spacing="-1">T</text>
+</svg>

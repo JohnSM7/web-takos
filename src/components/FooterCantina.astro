@@ -1,0 +1,99 @@
+---
+import { negocio, locales } from '@data/business';
+const ano = new Date().getFullYear();
+---
+
+<footer
+  data-bg="#0B0908"
+  data-fg="#FAF6EC"
+  class="relative bg-noche text-crema grain"
+>
+  <div class="max-w-6xl mx-auto px-6 sm:px-12 py-20 grid md:grid-cols-3 gap-12">
+
+    <div>
+      <a href="#top" class="flex items-center gap-3 group">
+        <span class="block w-16 h-16 rounded-full overflow-hidden shadow-xl">
+          <img src={negocio.logo} alt={`Logo ${negocio.nombre}`} class="w-full h-full object-cover" width="64" height="64"/>
+        </span>
+        <span class="font-display text-2xl tracking-tight text-crema uppercase">{negocio.nombre}</span>
+      </a>
+      <p class="mt-6 text-crema/75 serif-body leading-relaxed max-w-sm">
+        {negocio.descripcion}
+      </p>
+      <div class="mt-6 flex items-center gap-3 text-crema/80 font-mono text-[10px] uppercase tracking-widest">
+        <span class="px-3 py-1 bg-chile text-crema rounded-full font-bold">{negocio.rating} ★</span>
+        <span>{negocio.resenasTotales.toLocaleString('es-ES')} reseñas</span>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="sello text-amarillo">Horario</h3>
+      <p class="mt-5 font-display text-xl leading-tight text-crema uppercase tracking-tight">{negocio.horario.legible}</p>
+      <p class="mt-2 text-crema/65 text-sm serif-body italic">{negocio.horario.cerrado}</p>
+      <div class="mt-7 font-mono text-xs space-y-2 text-crema/85">
+        <a href={`tel:${negocio.telefono.replace(/\s/g, '')}`} class="block hover:text-amarillo transition">
+          {negocio.telefono}
+        </a>
+        <a href={`mailto:${negocio.email}`} class="block hover:text-amarillo transition">
+          {negocio.email}
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="sello text-amarillo">Locales</h3>
+      <ul class="mt-5 space-y-4">
+        {locales.map((l) => (
+          <li class="text-crema/85 serif-body text-sm">
+            <strong class="block text-crema font-display text-base uppercase tracking-tight">
+              {l.nombre.split('·')[1]?.trim() ?? l.nombre}
+            </strong>
+            {l.direccion}
+          </li>
+        ))}
+      </ul>
+      <div class="mt-7 flex gap-3">
+        <a href={negocio.redes.instagram} target="_blank" rel="noopener" aria-label="Instagram" class="w-11 h-11 rounded-full bg-crema/8 flex items-center justify-center hover:bg-chile transition" style="background:rgba(250,246,236,0.08)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+          </svg>
+        </a>
+        <a href={negocio.redes.facebook} target="_blank" rel="noopener" aria-label="Facebook" class="w-11 h-11 rounded-full flex items-center justify-center hover:bg-chile transition" style="background:rgba(250,246,236,0.08)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M13 22V12h3l1-4h-4V6c0-1.2.4-2 2-2h2V0h-3c-3 0-5 1.8-5 5v3H6v4h3v10h4z"/>
+          </svg>
+        </a>
+        <a href={negocio.redes.tripadvisor} target="_blank" rel="noopener" aria-label="Tripadvisor" class="w-11 h-11 rounded-full flex items-center justify-center hover:bg-chile transition font-display text-sm" style="background:rgba(250,246,236,0.08)">
+          T
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Marquee inferior -->
+  <div class="relative w-full overflow-hidden bg-chile py-3">
+    <div class="marquee gap-12 px-6 font-display text-sm text-crema uppercase whitespace-nowrap">
+      {Array.from({ length: 4 }).flatMap(() => [
+        <span>★ SABE A MÉXICO ★</span>,
+        <span>★ DESDE 1 € ★</span>,
+        <span>★ SIN RESERVAS ★</span>,
+        <span>★ MADRID CENTRO ★</span>,
+      ])}
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-6 sm:px-12 py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-crema/40 text-xs font-mono">
+    <span>© {ano} {negocio.nombre}. Todos los derechos reservados.</span>
+    <span>
+      Powered by
+      <a
+        href="https://www.tanesolutions.com/"
+        target="_blank"
+        rel="noopener"
+        class="text-crema/70 hover:text-amarillo transition underline underline-offset-2 decoration-crema/30"
+      >
+        tane solutions
+      </a>
+    </span>
+  </div>
+</footer>

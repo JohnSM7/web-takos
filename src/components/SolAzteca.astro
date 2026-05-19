@@ -1,0 +1,47 @@
+---
+// Sol radial decorativo estilo lotería / talavera mexicana
+interface Props {
+  size?: number;
+  fill?: string;
+  class?: string;
+}
+const { size = 320, fill = '#E87A2C', class: extra = '' } = Astro.props;
+const rays = 24;
+---
+
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 200 200"
+  class={`sol-azteca ${extra}`}
+  aria-hidden="true"
+>
+  <g style="transform-origin: 100px 100px;" class="sol-spin">
+    {Array.from({ length: rays }).map((_, i) => {
+      const angle = (i * 360) / rays;
+      const long = i % 2 === 0;
+      return (
+        <polygon
+          points={long ? '100,12 105,52 95,52' : '100,22 103,52 97,52'}
+          fill={fill}
+          style={`transform: rotate(${angle}deg); transform-origin: 100px 100px;`}
+        />
+      );
+    })}
+  </g>
+  <circle cx="100" cy="100" r="40" fill={fill}/>
+  <circle cx="100" cy="100" r="32" fill="#F2D785"/>
+  <circle cx="100" cy="100" r="22" fill={fill}/>
+  <!-- Cara estilo loteria del sol -->
+  <circle cx="92" cy="96" r="3" fill="#0B0908"/>
+  <circle cx="108" cy="96" r="3" fill="#0B0908"/>
+  <path d="M92 108 Q100 116 108 108" stroke="#0B0908" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+  <style>
+    .sol-spin { animation: sol-rotate 60s linear infinite; }
+    @keyframes sol-rotate { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) {
+      .sol-spin { animation: none; }
+    }
+  </style>
+</svg>

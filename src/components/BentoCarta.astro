@@ -1,0 +1,114 @@
+---
+import { carta } from '@data/business';
+---
+
+<section
+  id="carta"
+  data-bg="#FAF6EC"
+  data-fg="#0B0908"
+  class="relative w-full py-28 sm:py-40 px-6 sm:px-12"
+>
+  <!-- Encabezado -->
+  <header class="max-w-6xl mx-auto mb-20 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+    <div>
+      <span class="sello text-chile">★ La carta ★</span>
+      <h2 class="mt-6 leading-[0.95] tracking-tight scroll-fade-in">
+        <span class="block font-display text-noche text-5xl sm:text-7xl uppercase">Seis platos.</span>
+        <span class="block serif-italic text-chile text-5xl sm:text-7xl">una obsesión.</span>
+      </h2>
+    </div>
+    <p class="max-w-sm text-noche/75 serif-body leading-relaxed">
+      No hay carta de 40 platos para encubrir mediocridad. Hay lo que sabemos hacer
+      mejor que nadie y lo hacemos cada día desde la mañana.
+    </p>
+  </header>
+
+  <!-- Bento limpio -->
+  <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-6 grid-rows-[repeat(8,minmax(90px,1fr))] gap-5 md:gap-6">
+
+    <!-- 1. Pastor — hero card -->
+    <article class="bento-card col-span-2 md:col-span-4 row-span-5 bg-noche">
+      <div class="absolute inset-0">
+        <img src={carta[0].imagen} alt={carta[0].nombre} class="w-full h-full object-cover opacity-85 scroll-parallax" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-noche via-noche/30 to-transparent"></div>
+      </div>
+      <div class="relative z-10 h-full flex flex-col justify-between p-8 sm:p-10 text-crema">
+        <div class="flex items-start justify-between">
+          <span class="sello text-amarillo">★ {carta[0].tag}</span>
+          <span class="font-display text-5xl sm:text-7xl text-amarillo">{carta[0].precio}</span>
+        </div>
+        <div>
+          <h3 class="font-display text-4xl sm:text-6xl leading-[0.92] tracking-tight uppercase">{carta[0].nombre}</h3>
+          <p class="mt-4 max-w-md text-crema/85 serif-body leading-relaxed">{carta[0].descripcion}</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 2. Arrachera -->
+    <article class="bento-card col-span-2 md:col-span-2 row-span-5 bg-chileDeep text-crema">
+      <div class="absolute inset-0 opacity-50">
+        <img src={carta[1].imagen} alt={carta[1].nombre} class="w-full h-full object-cover" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-chileDeep via-chileDeep/40 to-transparent"></div>
+      </div>
+      <div class="relative z-10 h-full flex flex-col justify-between p-7">
+        <span class="sello text-amarillo">{carta[1].tag}</span>
+        <div>
+          <span class="block font-display text-3xl text-amarillo">{carta[1].precio}</span>
+          <h3 class="mt-2 font-display text-2xl sm:text-3xl leading-[0.95] uppercase">{carta[1].nombre}</h3>
+          <p class="mt-3 text-sm text-crema/85 serif-body leading-relaxed">{carta[1].descripcion}</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 3. Quesadilla -->
+    <article class="bento-card col-span-2 md:col-span-3 row-span-3 bg-amarillo text-noche">
+      <div class="absolute inset-0 opacity-20">
+        <img src={carta[2].imagen} alt="" class="w-full h-full object-cover" loading="lazy"/>
+      </div>
+      <div class="relative z-10 h-full flex items-center justify-between gap-5 p-7">
+        <div>
+          <span class="sello text-noche/70">{carta[2].tag}</span>
+          <h3 class="mt-2 font-display text-2xl sm:text-3xl leading-[0.95] uppercase">{carta[2].nombre}</h3>
+          <p class="mt-2 text-sm text-noche/80 serif-body max-w-xs">{carta[2].descripcion}</p>
+        </div>
+        <span class="font-display text-5xl sm:text-6xl text-chile">{carta[2].precio}</span>
+      </div>
+    </article>
+
+    <!-- 4. Michelada -->
+    <article class="bento-card col-span-1 md:col-span-2 row-span-3 bg-jade text-crema">
+      <div class="absolute inset-0 opacity-20">
+        <img src={carta[5].imagen} alt="" class="w-full h-full object-cover" loading="lazy"/>
+      </div>
+      <div class="relative z-10 h-full flex flex-col justify-between p-6">
+        <span class="sello text-amarillo">{carta[5].tag}</span>
+        <div>
+          <h3 class="font-display text-xl leading-tight uppercase">{carta[5].nombre}</h3>
+          <span class="mt-2 inline-block font-display text-3xl text-amarillo">{carta[5].precio}</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- 5. Cochinita -->
+    <article class="bento-card col-span-1 md:col-span-1 row-span-3 bg-noche text-crema">
+      <div class="absolute inset-0 opacity-55">
+        <img src={carta[4].imagen} alt="" class="w-full h-full object-cover" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-noche to-noche/20"></div>
+      </div>
+      <div class="relative z-10 h-full flex flex-col justify-between p-5">
+        <span class="font-mono text-[9px] uppercase tracking-widest text-amarillo">YUC.</span>
+        <div>
+          <h3 class="font-display text-sm leading-tight uppercase">{carta[4].nombre}</h3>
+          <span class="mt-1 block font-display text-2xl text-chile">{carta[4].precio}</span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- Nota -->
+  <p class="max-w-6xl mx-auto mt-14 font-hand text-2xl sm:text-3xl text-chile">
+    + alambres, gringas, sopes, tortas, aguas frescas, jarritos…
+    <span class="text-noche">la carta completa la descubres dentro.</span>
+  </p>
+</section>

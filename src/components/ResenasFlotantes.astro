@@ -1,0 +1,69 @@
+---
+import { resenas, negocio } from '@data/business';
+---
+
+<section
+  id="resenas"
+  data-bg="#2D9B6B"
+  data-fg="#FAF6EC"
+  class="relative w-full py-28 sm:py-40 px-6 sm:px-12 overflow-hidden grain"
+>
+  <!-- Una sola estrella decorativa de fondo, muy sutil -->
+  <div aria-hidden="true" class="absolute -right-12 -top-12 sm:-right-20 sm:-top-20 text-amarillo/15 font-display text-[34vw] sm:text-[22vw] leading-none pointer-events-none select-none">
+    ★
+  </div>
+
+  <header class="relative max-w-6xl mx-auto mb-16">
+    <span class="sello text-amarillo">★ Voces de cantina ★</span>
+    <div class="mt-6 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-8">
+      <h2 class="leading-[0.95] tracking-tight">
+        <span class="block font-display text-crema text-5xl sm:text-7xl">{negocio.rating} ★</span>
+        <span class="block serif-italic text-amarillo text-4xl sm:text-6xl mt-1">
+          {negocio.resenasTotales.toLocaleString('es-ES')} opiniones
+        </span>
+      </h2>
+      <p class="max-w-sm text-crema/85 serif-body leading-relaxed">
+        Son reales y se pueden leer en Google, Tripadvisor y Yelp.
+        Nosotros sólo las hemos traído aquí.
+      </p>
+    </div>
+  </header>
+
+  <!-- Grid de reseñas -->
+  <ul class="relative max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+    {resenas.map((r, i) => (
+      <li
+        class={`review-card relative bg-crema text-noche p-7 scroll-fade-in ${
+          i % 3 === 1 ? 'md:translate-y-10' : ''
+        } ${i % 3 === 2 ? 'md:translate-y-5' : ''}`}
+      >
+        <div class="flex items-center justify-between mb-5">
+          <div class="flex gap-0.5 text-chile">
+            {Array.from({ length: r.rating }).map(() => <span>★</span>)}
+            {Array.from({ length: 5 - r.rating }).map(() => <span class="opacity-15">★</span>)}
+          </div>
+          <span class="font-mono text-[10px] uppercase tracking-widest text-noche/40">{r.origen}</span>
+        </div>
+        <blockquote class="serif-italic text-noche text-xl leading-snug">
+          "{r.texto}"
+        </blockquote>
+        <footer class="mt-6 pt-4 border-t border-noche/15 flex items-center justify-between text-noche/60 text-xs font-mono uppercase tracking-widest">
+          <span class="font-bold text-noche">{r.autor}</span>
+          <span>{r.fecha}</span>
+        </footer>
+      </li>
+    ))}
+  </ul>
+
+  <div class="relative max-w-6xl mx-auto mt-16 text-center">
+    <a
+      href={negocio.redes.tripadvisor}
+      target="_blank"
+      rel="noopener"
+      data-magnetic
+      class="btn-pop btn-pop--amarillo"
+    >
+      Leer las {negocio.resenasTotales.toLocaleString('es-ES')} reseñas →
+    </a>
+  </div>
+</section>

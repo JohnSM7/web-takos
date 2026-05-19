@@ -1,0 +1,30 @@
+---
+// Separador decorativo tipo azulejo de talavera de Puebla
+interface Props {
+  color?: string;
+  bg?: string;
+  class?: string;
+}
+const { color = '#0B0908', bg = 'transparent', class: extra = '' } = Astro.props;
+---
+
+<svg
+  viewBox="0 0 600 60"
+  preserveAspectRatio="none"
+  class={`talavera-border w-full h-12 sm:h-14 block ${extra}`}
+  aria-hidden="true"
+>
+  <rect width="600" height="60" fill={bg}/>
+  {/* Patrón de greca azteca repetida */}
+  {Array.from({ length: 15 }).map((_, i) => {
+    const x = i * 40;
+    return (
+      <g transform={`translate(${x}, 0)`}>
+        <path
+          d="M0 30 L10 30 L10 10 L30 10 L30 30 L40 30 L40 50 L30 50 L30 40 L10 40 L10 50 L0 50 Z"
+          fill={color}
+        />
+      </g>
+    );
+  })}
+</svg>

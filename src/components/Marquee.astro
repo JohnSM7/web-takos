@@ -1,0 +1,23 @@
+---
+const palabras = [
+  '★ TACO AL PASTOR · 1 EURO',
+  '¡AUTÉNTICO COMO EN MÉXICO!',
+  '★ SIN RESERVAS · SIN POSTUREO',
+  'FUEGO · MASA · ACHIOTE',
+  '★ MADRID CENTRO',
+  'ABIERTO HASTA MEDIANOCHE',
+  '★ DESDE 2014',
+  'PIÑA · CEBOLLA · CILANTRO',
+];
+---
+
+<div class="relative w-full overflow-hidden bg-chile text-crema py-5">
+  <div class="marquee gap-12 px-6 font-display text-2xl sm:text-3xl uppercase whitespace-nowrap">
+    {[...palabras, ...palabras].map((p) => (
+      <span class="inline-flex items-center gap-12">
+        {p}
+        <span class="inline-block w-2 h-2 rotate-45 bg-amarillo"></span>
+      </span>
+    ))}
+  </div>
+</div>
