@@ -1,21 +1,9 @@
 ---
+import { biblioteca } from '@data/business';
 import Stickers from './Stickers.astro';
 
-// Sección "Para beber" — Jarritos + Michelada + Cervezas
-const jarritos = [
-  { sabor: 'Tamarindo', color: '#7A1F12', accent: '#E87A2C' },
-  { sabor: 'Mandarina', color: '#E87A2C', accent: '#F2D785' },
-  { sabor: 'Lima-limón', color: '#9CC23B', accent: '#2D9B6B' },
-  { sabor: 'Fresa', color: '#DC2626', accent: '#F2D785' },
-  { sabor: 'Jamaica', color: '#A11414', accent: '#FAF6EC' },
-];
-
-const cervezas = [
-  { nombre: 'Corona', label: 'Extra', color: '#F2D785' },
-  { nombre: 'Modelo', label: 'Especial', color: '#E8A53A' },
-  { nombre: 'Pacífico', label: 'Clara', color: '#4FC3F7' },
-  { nombre: 'Victoria', label: 'México', color: '#B65512' },
-];
+const jarritosSabores = ['Tamarindo', 'Mandarina', 'Jamaica', 'Mango', 'Lima', 'Fresa', 'Sandía', 'Piña'];
+const cervezasSabores = ['Corona Extra', 'Modelo Especial', 'Pacífico Clara', 'Victoria', 'XX Lager'];
 ---
 
 <Stickers />
@@ -47,86 +35,109 @@ const cervezas = [
       </h2>
       <p class="mt-6 max-w-xl mx-auto serif-body text-noche text-base sm:text-lg">
         Jarritos de cristal, micheladas con tajín y cerveza fría como manda la cantina.
-        Todo importado de México, todo a precio honesto.
+        Importados de México, a precio honesto.
       </p>
     </header>
 
-    <!-- Jarritos (sabores) -->
-    <div class="mb-14">
-      <div class="flex items-center justify-between mb-6">
-        <h3 class="font-display text-2xl sm:text-3xl text-noche uppercase tracking-tight">★ Jarritos</h3>
-        <span class="font-display text-xl sm:text-2xl text-chile bg-amarillo px-3 py-1 rounded-full">2 €</span>
-      </div>
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
-        {jarritos.map((j, i) => (
-          <article
-            class="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-lg p-4 flex flex-col items-center justify-end text-center"
-            style={`background: linear-gradient(180deg, ${j.color} 0%, ${j.accent} 100%); transform: rotate(${i % 2 === 0 ? '-1' : '1'}deg);`}
-          >
-            <svg class="absolute top-3 left-1/2 -translate-x-1/2 w-14 h-14 sm:w-20 sm:h-20 drop-shadow-lg">
-              <use href="#sticker-jarrito"/>
-            </svg>
-            <h4 class="relative font-display text-base sm:text-lg text-crema uppercase leading-tight">{j.sabor}</h4>
-            <div class="relative mt-1 inline-block px-2 py-0.5 bg-crema text-noche font-mono text-[9px] uppercase tracking-widest rounded-full">
-              Jarrito
-            </div>
-          </article>
-        ))}
-      </div>
-    </div>
-
-    <!-- Michelada destacada + Cervezas -->
-    <div class="grid md:grid-cols-3 gap-5">
-
-      <!-- Michelada hero card -->
-      <article class="md:col-span-2 relative rounded-3xl overflow-hidden bg-noche text-crema p-6 sm:p-8 min-h-[280px] shadow-2xl">
-        <!-- Stickers decorativos -->
-        <svg class="absolute top-4 right-4 w-16 h-16 sm:w-24 sm:h-24 rotate-12">
-          <use href="#sticker-chile"/>
-        </svg>
-        <svg class="absolute bottom-4 right-20 w-10 h-10 sm:w-14 sm:h-14 -rotate-6">
+    <!-- BLOQUE 1: Jarritos con foto real -->
+    <article class="relative bg-crema rounded-3xl overflow-hidden shadow-2xl mb-6 grid md:grid-cols-5 gap-0">
+      <!-- Foto Jarritos grupo -->
+      <div class="md:col-span-3 relative aspect-[4/3] md:aspect-auto overflow-hidden">
+        <img src="/images/bebidas/jarritos-grupo.jpg" alt="Botellas de Jarritos: Mango, Mineragua, Jamaica, Mexican Cola, Fruit Punch" class="w-full h-full object-cover" loading="lazy"/>
+        <!-- Sticker lima decorativo -->
+        <svg class="absolute top-4 right-4 w-14 h-14 -rotate-6 drop-shadow-lg">
           <use href="#sticker-lima"/>
+        </svg>
+      </div>
+
+      <!-- Contenido -->
+      <div class="md:col-span-2 p-6 sm:p-8 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-display text-3xl sm:text-4xl text-noche uppercase tracking-tight">Jarritos</h3>
+            <span class="font-display text-2xl text-crema bg-chile px-3 py-1 rounded-full">2 €</span>
+          </div>
+          <p class="serif-body text-noche/80 text-base leading-snug mb-5">
+            El refresco mexicano por excelencia. Botella de cristal,
+            sabor frutal real, espuma generosa. Importados directamente.
+          </p>
+          <div class="flex flex-wrap gap-1.5">
+            {jarritosSabores.map((s) => (
+              <span class="px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest bg-jade text-crema rounded-full">
+                {s}
+              </span>
+            ))}
+          </div>
+        </div>
+        <p class="mt-5 font-hand text-2xl text-chile">¡Que buenos son!</p>
+      </div>
+    </article>
+
+    <!-- BLOQUE 2: Michelada (hero card con foto del local) -->
+    <article class="relative rounded-3xl overflow-hidden shadow-2xl mb-6 grid md:grid-cols-5 gap-0 bg-noche">
+      <!-- Foto interior barra del local -->
+      <div class="md:col-span-2 relative aspect-[4/3] md:aspect-auto overflow-hidden order-2 md:order-1">
+        <img src={biblioteca.interior.barra} alt="Barra del local Takos al Pastor" class="w-full h-full object-cover" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-r md:from-noche md:via-noche/30 to-transparent"></div>
+      </div>
+
+      <!-- Contenido michelada -->
+      <div class="md:col-span-3 p-6 sm:p-10 relative order-1 md:order-2 text-crema">
+        <!-- Stickers chile + lima -->
+        <svg class="absolute top-4 right-4 w-16 h-16 sm:w-20 sm:h-20 rotate-12 drop-shadow-lg">
+          <use href="#sticker-chile"/>
         </svg>
 
         <span class="sello text-amarillo">★ La estrella de la barra ★</span>
         <h3 class="mt-5 font-display text-4xl sm:text-6xl uppercase leading-[0.92]">Michelada</h3>
         <p class="serif-italic text-amarillo text-2xl sm:text-3xl mt-1">de la casa</p>
-        <p class="mt-4 serif-body text-crema/85 text-base max-w-md leading-snug">
-          Cerveza muy fría, lima exprimida, chamoy, salsas y escarcha de tajín. Servida en jarra grande.
-          La hacemos como en México, sin atajos.
+        <p class="mt-4 serif-body text-crema/85 text-base sm:text-lg max-w-md leading-snug">
+          Cerveza muy fría, lima exprimida, chamoy, salsas y escarcha de tajín.
+          Servida en jarra grande. La hacemos como en México, sin atajos.
         </p>
         <div class="mt-6 flex items-end gap-4">
-          <span class="font-display text-5xl text-chile">5 €</span>
+          <span class="font-display text-5xl sm:text-6xl text-chile">5 €</span>
           <span class="font-mono text-[10px] uppercase tracking-widest text-crema/60 pb-2">jarra grande</span>
         </div>
-      </article>
-
-      <!-- Cervezas grid -->
-      <div class="flex flex-col gap-3">
-        <h3 class="font-display text-xl text-crema bg-chile px-4 py-3 rounded-2xl uppercase tracking-tight inline-flex items-center justify-between shadow-lg">
-          <span>★ Cerveza fría</span>
-          <span class="text-amarillo">3 €</span>
-        </h3>
-        {cervezas.map((c, i) => (
-          <article
-            class="rounded-xl px-4 py-3 shadow-md flex items-center justify-between gap-3"
-            style={`background: ${c.color};`}
-          >
-            <div>
-              <p class="font-display text-base sm:text-lg uppercase leading-tight" style={c.color === '#F2D785' || c.color === '#E8A53A' ? 'color:#0B0908' : 'color:#FAF6EC'}>
-                {c.nombre}
-              </p>
-              <p class="font-mono text-[9px] uppercase tracking-widest opacity-70" style={c.color === '#F2D785' || c.color === '#E8A53A' ? 'color:#0B0908' : 'color:#FAF6EC'}>
-                {c.label}
-              </p>
-            </div>
-            <span class="font-display text-2xl" style={c.color === '#F2D785' || c.color === '#E8A53A' ? 'color:#0B0908' : 'color:#FAF6EC'}>355ml</span>
-          </article>
-        ))}
       </div>
-    </div>
+    </article>
 
-    <!-- Aguas frescas mención -->
+    <!-- BLOQUE 3: Cervezas con foto Modelo + Corona -->
+    <article class="relative bg-crema rounded-3xl overflow-hidden shadow-2xl grid md:grid-cols-5 gap-0">
+      <!-- 2 fotos cervezas en split -->
+      <div class="md:col-span-2 grid grid-cols-2 gap-0">
+        <div class="relative aspect-[3/4] overflow-hidden">
+          <img src="/images/bebidas/cerveza-corona.jpg" alt="Corona Extra con lima" class="w-full h-full object-cover" loading="lazy"/>
+        </div>
+        <div class="relative aspect-[3/4] overflow-hidden">
+          <img src="/images/bebidas/cerveza-modelo.jpg" alt="Modelo Especial" class="w-full h-full object-cover" loading="lazy"/>
+        </div>
+      </div>
+
+      <!-- Contenido cervezas -->
+      <div class="md:col-span-3 p-6 sm:p-8 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-display text-3xl sm:text-4xl text-noche uppercase tracking-tight">Cerveza fría</h3>
+            <span class="font-display text-2xl text-crema bg-chile px-3 py-1 rounded-full">3 €</span>
+          </div>
+          <p class="serif-body text-noche/80 text-base leading-snug mb-5">
+            Cervezas mexicanas auténticas, servidas a la temperatura exacta.
+            Pídela con limón si manda el alma.
+          </p>
+          <div class="flex flex-wrap gap-1.5">
+            {cervezasSabores.map((s) => (
+              <span class="px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest bg-noche text-crema rounded-full">
+                {s}
+              </span>
+            ))}
+          </div>
+        </div>
+        <p class="mt-5 font-hand text-2xl text-jade">355 ml de México puro</p>
+      </div>
+    </article>
+
+    <!-- Aguas frescas -->
     <p class="mt-12 text-center font-hand text-2xl sm:text-3xl text-noche">
       + aguas frescas de horchata, jamaica y tamarindo
       <span class="block text-base sm:text-lg text-noche/70 font-body mt-1 italic">
