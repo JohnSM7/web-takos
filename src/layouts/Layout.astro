@@ -11,7 +11,7 @@ interface Props {
 const {
   title = `${negocio.nombre} · Auténticos tacos al pastor en Madrid Centro`,
   description = '🌮 La taquería mexicana más famosa de Madrid. Tacos al pastor marinados 12 horas en achiote y cortados del trompo a la vista. 4,5★ con +13.500 reseñas en Google. C/ Salud 13. Sin reservas.',
-  image = '/images/local/fachada-dia.jpg',
+  image = '/og-takos-v2.png',
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
@@ -101,10 +101,10 @@ const jsonLd = {
     <meta property="og:description" content={description} />
     <meta property="og:image" content={absoluteImage} />
     <meta property="og:image:secure_url" content={absoluteImage} />
-    <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="800" />
-    <meta property="og:image:height" content="1100" />
-    <meta property="og:image:alt" content={`Fachada del local ${negocio.nombre} en Calle de la Salud 13, Madrid`} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1380" />
+    <meta property="og:image:height" content="1380" />
+    <meta property="og:image:alt" content={`Logo oficial ${negocio.nombre}`} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="es_ES" />
     <meta property="og:site_name" content={negocio.nombre} />
@@ -118,7 +118,7 @@ const jsonLd = {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={absoluteImage} />
-    <meta name="twitter:image:alt" content={`Fachada del local ${negocio.nombre} en Calle de la Salud 13, Madrid`} />
+    <meta name="twitter:image:alt" content={`Logo oficial ${negocio.nombre}`} />
     <meta name="twitter:site" content="@takosalpastor1_oficial" />
 
     <!-- Geo -->
