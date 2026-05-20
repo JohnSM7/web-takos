@@ -51,7 +51,7 @@ export const negocio = {
   nombre: 'Takos al Pastor',
   claim: '¡Auténtico como en México!',
   descripcion:
-    'La taquería que enamoró a Madrid. Tacos al pastor a 1 €, marinados con achiote y cortados del trompo. Sin reservas, sin postureo, sólo fuego, masa y sabor mexicano de verdad.',
+    'La taquería que enamoró a Madrid. Tacos al pastor marinados con achiote y cortados del trompo a la vista. Sin reservas, sin postureo, sólo fuego, masa y sabor mexicano de verdad.',
   telefono: '+34 911 23 30 41',
   email: 'hola@takosalpastor.es',
   rating: 4.5,
@@ -131,7 +131,7 @@ export const carta: PlatoCarta[] = [
     nombre: 'Taco al Pastor',
     descripcion:
       'Lomo de cerdo marinado al pastor 12 h en achiote. Servido con cebolla, cilantro y piña.',
-    precio: '1 €',
+    precio: '1,5 €',
     tag: 'El que nos hizo famosos',
     destacado: true,
     imagen: `${LOCAL}/tacos-pastor-pina.jpg`,
@@ -190,7 +190,7 @@ export const cartaCompleta: CategoriaCarta[] = [
     nombre: 'Takos',
     nota: 'Tortilla de maíz, cebolla, cilantro y salsa de la casa.',
     items: [
-      { nombre: 'Pastor', precio: '1 €', ingredientes: 'Lomo de cerdo marinado al pastor con cebolla, cilantro y piña', destacado: true },
+      { nombre: 'Pastor', precio: '1,5 €', ingredientes: 'Lomo de cerdo marinado al pastor con cebolla, cilantro y piña', destacado: true },
       { nombre: 'Suadero', precio: '1,5 €', ingredientes: 'Tierna carne de ternera con cebolla y cilantro' },
       { nombre: 'Cochinita Pibil', precio: '1,2 €', ingredientes: 'Cerdo adobado en achiote con cebolla morada' },
       { nombre: 'Tinga de Pollo', precio: '1,2 €', ingredientes: 'Pollo deshebrado con chile chipotle' },

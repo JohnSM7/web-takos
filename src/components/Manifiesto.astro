@@ -15,33 +15,33 @@ import { negocio, biblioteca } from '@data/business';
 
       <h2 class="mt-6 leading-[0.92] tracking-tight">
         <span class="block font-display text-noche text-5xl sm:text-7xl md:text-8xl uppercase">
-          Un tako.
+          Doce horas
         </span>
         <span class="block serif-italic text-crema text-6xl sm:text-8xl md:text-9xl -mt-2">
-          un euro.
+          de marinado.
         </span>
         <span class="block font-hand text-noche text-4xl sm:text-6xl mt-6 rotate-[-2deg]">
-          ¡cero excusas!
+          ¡cero atajos!
         </span>
       </h2>
 
       <!-- Cartel manifesto -->
-      <div class="mt-10 max-w-2xl mx-auto lg:mx-0 bg-crema rounded-3xl px-6 sm:px-8 py-7 shadow-2xl rotate-[-0.5deg]">
+      <div class="mt-10 max-w-2xl mx-auto md:mx-0 bg-crema rounded-3xl px-6 sm:px-8 py-7 shadow-2xl rotate-[-0.5deg]">
         <p class="serif-body text-noche text-base sm:text-lg leading-snug">
           Marinamos cerdo en achiote y especias durante <strong class="font-display">12 horas</strong>.
           Lo apilamos en un trompo. Lo asamos a fuego vivo. Lo cortamos delante de ti.
           Tortilla recién hecha. Piña. Cebolla. Cilantro.
-          <span class="block mt-3 font-display text-xl sm:text-2xl text-chile uppercase tracking-tight">Te lo damos por un euro.</span>
+          <span class="block mt-3 font-display text-xl sm:text-2xl text-chile uppercase tracking-tight">Eso es un taco al pastor de verdad.</span>
         </p>
       </div>
 
       <!-- Estadísticas -->
-      <div class="mt-10 flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4">
+      <div class="mt-10 flex flex-wrap items-center justify-center md:justify-start gap-3 sm:gap-4">
         {[
           { n: `${negocio.rating}★`, t: 'en Google', c: 'bg-chile text-crema' },
           { n: negocio.resenasTotales.toLocaleString('es-ES'), t: 'reseñas', c: 'bg-jade text-crema' },
           { n: '+10', t: 'años en Madrid', c: 'bg-talavera text-noche' },
-          { n: '12 h', t: 'marinado', c: 'bg-amarillo text-noche' },
+          { n: '26', t: 'platos en carta', c: 'bg-amarillo text-noche' },
         ].map((s, i) => (
           <div class={`${s.c} rounded-2xl px-5 py-3 shadow-xl`} style={`transform: rotate(${i % 2 === 0 ? '-1.5' : '1.5'}deg);`}>
             <div class="font-display text-xl sm:text-2xl leading-none">{s.n}</div>
@@ -51,11 +51,10 @@ import { negocio, biblioteca } from '@data/business';
       </div>
     </div>
 
-    <!-- COLUMNA VISUAL: stack de fotos del trompo + interior -->
+    <!-- COLUMNA VISUAL -->
     <div class="md:col-span-5 relative">
       <div class="relative h-[380px] sm:h-[460px] lg:h-[520px] max-w-md mx-auto md:max-w-none">
-
-        <!-- Foto principal: Catrina y papel picado naranja del local nuevo -->
+        <!-- Foto principal: Catrina con cempasúchil del local nuevo -->
         <figure class="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl rotate-[2deg]">
           <img src={biblioteca.interior.catrinaCempasuchil} alt="Catrina con cempasúchil y papel picado en el comedor" class="w-full h-full object-cover" loading="lazy"/>
         </figure>
