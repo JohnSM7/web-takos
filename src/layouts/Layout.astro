@@ -9,12 +9,28 @@ interface Props {
 }
 
 const {
-  title = `${negocio.nombre} · Tacos al pastor auténticos en Madrid`,
-  description = negocio.descripcion,
-  image = 'https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=1200&q=80',
+  title = `${negocio.nombre} · Tacos al pastor a 1€ en Madrid Centro`,
+  description = '🌮 La taquería mexicana más famosa de Madrid. Tacos al pastor a 1€, marinados 12 horas en achiote y cortados del trompo. 4,5★ con +13.500 reseñas en Google. C/ Salud 13. Sin reservas.',
+  image = '/images/local/fachada-dia.jpg',
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+// Convierte rutas relativas a URL absoluta (obligatorio para OG / Twitter Cards)
+const absoluteImage = image.startsWith('http')
+  ? image
+  : new URL(image, Astro.site).toString();
+
+const keywords = [
+  'tacos al pastor',
+  'taquería Madrid',
+  'comida mexicana Madrid',
+  'Takos al Pastor',
+  'tacos 1 euro Madrid',
+  'restaurante mexicano centro Madrid',
+  'mejores tacos Madrid',
+  'Calle Salud 13',
+  'Gran Vía mexicano',
+].join(', ');
 
 // JSON-LD Restaurant Schema — mapea datos reales del negocio
 const localPrincipal = locales.find((l) => l.destacado) ?? locales[0];
@@ -27,7 +43,7 @@ const jsonLd = {
   url: canonical,
   telephone: negocio.telefono,
   email: negocio.email,
-  image: [image],
+  image: [absoluteImage, new URL('/images/logo-takos.png', Astro.site).toString()],
   priceRange: '€',
   servesCuisine: ['Mexican', 'Tacos', 'Street Food'],
   acceptsReservations: 'False',
@@ -74,24 +90,36 @@ const jsonLd = {
     <!-- Primary Meta -->
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
     <meta name="theme-color" content="#E87A2C" />
     <meta name="author" content={negocio.nombre} />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
 
-    <!-- Open Graph -->
+    <!-- Open Graph (Facebook, LinkedIn, WhatsApp, Telegram) -->
     <meta property="og:type" content="restaurant.restaurant" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
+    <meta property="og:image" content={absoluteImage} />
+    <meta property="og:image:secure_url" content={absoluteImage} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="800" />
+    <meta property="og:image:height" content="1100" />
+    <meta property="og:image:alt" content={`Fachada del local ${negocio.nombre} en Calle de la Salud 13, Madrid`} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="es_ES" />
     <meta property="og:site_name" content={negocio.nombre} />
+    <meta property="restaurant:contact_info:street_address" content={localPrincipal.direccion} />
+    <meta property="restaurant:contact_info:locality" content={localPrincipal.ciudad} />
+    <meta property="restaurant:contact_info:country_name" content={localPrincipal.pais} />
+    <meta property="restaurant:contact_info:postal_code" content={localPrincipal.cp} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={image} />
+    <meta name="twitter:image" content={absoluteImage} />
+    <meta name="twitter:image:alt" content={`Fachada del local ${negocio.nombre} en Calle de la Salud 13, Madrid`} />
+    <meta name="twitter:site" content="@takosalpastor1_oficial" />
 
     <!-- Geo -->
     <meta name="geo.region" content="ES-MD" />
