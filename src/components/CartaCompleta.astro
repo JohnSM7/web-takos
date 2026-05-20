@@ -1,0 +1,96 @@
+---
+import { cartaCompleta, cartaExtras } from '@data/business';
+---
+
+<section
+  id="carta-completa"
+  data-bg="#FAF6EC"
+  data-fg="#0B0908"
+  class="relative w-full py-24 sm:py-32 px-5 sm:px-10 lg:px-12 overflow-hidden"
+>
+  <!-- Encabezado -->
+  <header class="max-w-6xl mx-auto mb-14 sm:mb-20 text-center">
+    <span class="sello text-chile mb-6 inline-block">★ ¿Qué comer? ★</span>
+    <h2 class="leading-[0.92] tracking-tight">
+      <span class="block font-display text-noche text-5xl sm:text-7xl uppercase">Carta</span>
+      <span class="block serif-italic text-chile text-5xl sm:text-7xl">completa</span>
+    </h2>
+    <p class="mt-6 max-w-2xl mx-auto serif-body text-noche/80 text-base sm:text-lg">
+      26 platos honestos. 4 categorías. Cero atajos.
+      Esto es lo que vas a comer cuando vengas a Takos al Pastor.
+    </p>
+  </header>
+
+  <!-- Grid de categorías 2×2 -->
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-6 sm:gap-8">
+    {cartaCompleta.map((cat) => (
+      <article
+        class="relative bg-crema rounded-3xl border-3 border-noche p-6 sm:p-7 shadow-comic"
+        style="border:3px solid #0B0908;"
+      >
+        <!-- Header categoría -->
+        <header class="flex items-baseline justify-between gap-4 mb-5 pb-4 border-b-2 border-dashed border-noche/20">
+          <h3 class="font-display text-3xl sm:text-4xl text-noche uppercase tracking-tight">
+            {cat.nombre}
+          </h3>
+          {cat.precioBase && (
+            <span class="shrink-0 font-display text-2xl text-crema bg-chile px-3 py-1 rounded-full">
+              {cat.precioBase}
+            </span>
+          )}
+        </header>
+
+        {cat.nota && (
+          <p class="font-hand text-xl text-chileDeep mb-5 leading-tight">
+            {cat.nota}
+          </p>
+        )}
+
+        <!-- Lista de items -->
+        <ul class="space-y-3">
+          {cat.items.map((item) => (
+            <li class="flex items-start gap-3">
+              <span class="shrink-0 font-display text-base sm:text-lg text-chile leading-tight w-14 sm:w-16">
+                {item.precio}
+              </span>
+              <div class="flex-1 min-w-0">
+                <p class="font-display text-base sm:text-lg text-noche uppercase tracking-tight leading-tight inline-flex items-center gap-1.5">
+                  {item.nombre}
+                  {item.destacado && <span class="text-chile">★</span>}
+                </p>
+                <p class="serif-body text-sm text-noche/70 leading-snug mt-0.5">
+                  {item.ingredientes}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </article>
+    ))}
+  </div>
+
+  <!-- EXTRAS -->
+  <div class="max-w-6xl mx-auto mt-8 sm:mt-10 bg-amarillo rounded-3xl p-6 sm:p-8" style="border:3px solid #0B0908; box-shadow: 6px 6px 0 #0B0908;">
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+      <h3 class="font-display text-2xl sm:text-3xl text-noche uppercase tracking-tight">★ Extras</h3>
+      <span class="font-hand text-2xl text-chileDeep">¡pídelo a tu manera!</span>
+    </div>
+    <div class="flex flex-wrap gap-2 sm:gap-3">
+      {cartaExtras.map((e) => (
+        <div class="bg-crema rounded-full px-4 py-2 flex items-center gap-2.5 shadow-md">
+          <span class="font-mono text-[10px] uppercase tracking-widest text-noche/60">+</span>
+          <span class="font-display text-sm text-noche uppercase tracking-tight">{e.nombre}</span>
+          <span class="font-display text-sm text-chile">{e.precio}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Footer note -->
+  <p class="max-w-6xl mx-auto mt-12 text-center font-hand text-2xl sm:text-3xl text-chile">
+    + aguas frescas, jarritos, micheladas y cerveza fría
+    <span class="block text-base sm:text-lg text-noche/70 font-body mt-1 italic">
+      consulta la sección "Para beber"
+    </span>
+  </p>
+</section>

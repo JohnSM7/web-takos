@@ -24,6 +24,21 @@ export interface PlatoCarta {
   imagen: string;
 }
 
+export interface ItemCarta {
+  nombre: string;
+  precio: string;
+  ingredientes: string;
+  destacado?: boolean;
+}
+
+export interface CategoriaCarta {
+  id: string;
+  nombre: string;
+  precioBase?: string;
+  nota?: string;
+  items: ItemCarta[];
+}
+
 export interface Resena {
   autor: string;
   fecha: string;
@@ -109,12 +124,13 @@ export const biblioteca = {
   },
 } as const;
 
+// ───── BENTO destacados (carta resumida con foto) ─────
 export const carta: PlatoCarta[] = [
   {
     id: 'pastor',
     nombre: 'Taco al Pastor',
     descripcion:
-      'El icónico. Cerdo marinado en achiote y especias durante 12 horas, cortado del trompo. Piña, cebolla, cilantro, salsa de la casa.',
+      'Lomo de cerdo marinado al pastor 12 h en achiote. Servido con cebolla, cilantro y piña.',
     precio: '1 €',
     tag: 'El que nos hizo famosos',
     destacado: true,
@@ -124,35 +140,35 @@ export const carta: PlatoCarta[] = [
     id: 'arrachera',
     nombre: 'Taco de Arrachera',
     descripcion:
-      'Falda de ternera marinada y a la plancha. Jugosa, ahumada, con tortilla de maíz recién hecha.',
-    precio: '2,20 €',
+      'El mejor corte de carne de ternera marinada, servido con cebolla. Jugoso, ahumado.',
+    precio: '1,5 €',
     tag: 'Favorito habitual',
     imagen: `${LOCAL}/tacos-variados.jpg`,
   },
   {
-    id: 'quesadilla',
-    nombre: 'Quesadilla XL',
+    id: 'gringa',
+    nombre: 'Gringa de Pastor',
     descripcion:
-      'Tortilla grande doblada y rellena hasta no poder más. Queso fundido, pastor o pollo. Cruje, hila, conquista.',
-    precio: '3,50 €',
-    tag: 'Para compartir (o no)',
+      'Quesadilla rebosante con carne al pastor y queso fundido. Cruje, hila, conquista.',
+    precio: '4 €',
+    tag: 'Para no compartir',
     imagen: `${LOCAL}/tacos-plato-talavera.jpg`,
   },
   {
     id: 'alambre',
-    nombre: 'Alambre Especial',
+    nombre: 'Alambre Mexicano',
     descripcion:
-      'Carne, pimiento, cebolla y queso gratinado sobre plancha caliente. Tortillas aparte para armar a tu manera.',
+      'Bistec, nopal, cebolla, queso y aguacate sobre plancha. Tortillas aparte para armar.',
     precio: '8 €',
-    tag: 'El más pedido en grupo',
+    tag: 'Para grupo',
     imagen: `${LOCAL}/alambre-queso.jpg`,
   },
   {
     id: 'cochinita',
     nombre: 'Cochinita Pibil',
     descripcion:
-      'Cerdo cocinado a fuego lento en hoja de plátano. Cebolla morada encurtida. Yucatán en cada bocado.',
-    precio: '1,80 €',
+      'Cerdo adobado en achiote. Cebolla morada encurtida. Yucatán en cada bocado.',
+    precio: '1,2 €',
     tag: 'Receta del Mayab',
     imagen: `${LOCAL}/tacos-variados.jpg`,
   },
@@ -160,11 +176,78 @@ export const carta: PlatoCarta[] = [
     id: 'michelada',
     nombre: 'Michelada de la casa',
     descripcion:
-      'Cerveza fría, lima, salsas, chamoy y escarcha de tajín. Servida en jarra grande. Frescor mexicano puro.',
+      'Cerveza fría, lima, chamoy y escarcha de tajín en jarra grande. Frescor mexicano.',
     precio: '5 €',
     tag: 'Imprescindible',
     imagen: `${LOCAL}/catrina-puertas-azul.jpg`,
   },
+];
+
+// ───── CARTA COMPLETA — Datos reales del menú del local ─────
+export const cartaCompleta: CategoriaCarta[] = [
+  {
+    id: 'takos',
+    nombre: 'Takos',
+    nota: 'Tortilla de maíz, cebolla, cilantro y salsa de la casa.',
+    items: [
+      { nombre: 'Pastor', precio: '1 €', ingredientes: 'Lomo de cerdo marinado al pastor con cebolla, cilantro y piña', destacado: true },
+      { nombre: 'Suadero', precio: '1,5 €', ingredientes: 'Tierna carne de ternera con cebolla y cilantro' },
+      { nombre: 'Cochinita Pibil', precio: '1,2 €', ingredientes: 'Cerdo adobado en achiote con cebolla morada' },
+      { nombre: 'Tinga de Pollo', precio: '1,2 €', ingredientes: 'Pollo deshebrado con chile chipotle' },
+      { nombre: 'Nopal con Queso', precio: '1,2 €', ingredientes: 'Vegetal típico mexicano (cactus) con queso' },
+      { nombre: 'Arrachera', precio: '1,5 €', ingredientes: 'El mejor corte de ternera marinada con cebolla' },
+    ],
+  },
+  {
+    id: 'alambres',
+    nombre: 'Alambres',
+    precioBase: '8 €',
+    nota: 'Plancha caliente con tortillas aparte. + 1 € por ingrediente extra.',
+    items: [
+      { nombre: 'Sabores', precio: '8 €', ingredientes: 'Pastor, bistec, bacon, chorizo y queso' },
+      { nombre: 'Morelos', precio: '8 €', ingredientes: 'Pastor, bistec, piña, queso y bacon' },
+      { nombre: 'Ballena', precio: '8 €', ingredientes: 'Pastor, pimiento, champiñón, cebolla y queso' },
+      { nombre: 'Sarape', precio: '8 €', ingredientes: 'Bistec, chorizo, pimiento, tomate y queso' },
+      { nombre: 'Mexicano', precio: '8 €', ingredientes: 'Bistec, nopal, cebolla, queso y aguacate', destacado: true },
+      { nombre: 'Combinado', precio: '8 €', ingredientes: 'Pastor, bistec, cebolla, pimiento y queso' },
+      { nombre: 'Vegetariano', precio: '8 €', ingredientes: 'Pimiento, champiñón, cebolla, nopal, aguacate y queso' },
+      { nombre: 'Arrachero', precio: '8 €', ingredientes: 'Arrachera, pimiento, cebolla y queso' },
+    ],
+  },
+  {
+    id: 'quesadillas',
+    nombre: 'Quesadillas',
+    nota: 'Tortilla doblada y dorada en plancha. + 0,5 € por ingrediente extra.',
+    items: [
+      { nombre: 'Gringa', precio: '4 €', ingredientes: 'Pastor y queso', destacado: true },
+      { nombre: 'Bistec', precio: '3,5 €', ingredientes: 'Bistec y queso' },
+      { nombre: 'Arrachera', precio: '4 €', ingredientes: 'Arrachera y queso' },
+      { nombre: 'Vegetariana', precio: '3,5 €', ingredientes: 'Pimiento, champiñón, cebolla, nopal y queso' },
+      { nombre: 'Sincronizada Especial', precio: '3,5 €', ingredientes: 'Bistec, champiñón, piña y queso' },
+      { nombre: 'Sincronizada', precio: '3,5 €', ingredientes: 'Jamón y queso' },
+      { nombre: 'Quesadilla', precio: '3 €', ingredientes: 'Solo queso fundido' },
+    ],
+  },
+  {
+    id: 'tortas',
+    nombre: 'Tortas',
+    nota: 'Pan torta con lechuga, tomate, aguacate y mayonesa. + 1 € por ingrediente extra.',
+    items: [
+      { nombre: 'Pastor', precio: '6,5 €', ingredientes: 'Carne al pastor con queso', destacado: true },
+      { nombre: 'Bistec', precio: '6,5 €', ingredientes: 'Bistec de ternera con queso' },
+      { nombre: 'Chorizo', precio: '6 €', ingredientes: 'Chorizo con queso' },
+      { nombre: 'Arrachera', precio: '7 €', ingredientes: 'Arrachera con queso' },
+      { nombre: 'Campechana', precio: '7 €', ingredientes: 'Pastor, bistec, chorizo y queso' },
+    ],
+  },
+];
+
+export const cartaExtras: { nombre: string; precio: string }[] = [
+  { nombre: 'Queso', precio: '0,5 €' },
+  { nombre: 'Vegetal (piña, cebolla)', precio: '0,5 €' },
+  { nombre: 'Guisado', precio: '1 €' },
+  { nombre: 'Aguacate', precio: '1 €' },
+  { nombre: 'Arrachera', precio: '1,5 €' },
 ];
 
 export const resenas: Resena[] = [
